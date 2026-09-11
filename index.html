@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PWA Maker — Complete PWA Generator</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;800&display=swap"
+            rel="stylesheet"
+        />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <header>
+            <div class="logo-icon">⚡</div>
+            <h1>PWA Maker</h1>
+            <p class="subtitle">
+                Generate icons, manifest, service worker, meta tags & more — everything to launch your PWA
+            </p>
+        </header>
+
+        <div class="main-container">
+            <!-- ── 01 Icon ─────────────────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">01 — App Icon</div>
+                <div id="dropZone" class="drop-zone">
+                    <input type="file" id="iconFile" accept="image/*" />
+                    <span class="drop-zone-icon">🖼️</span>
+                    <div class="drop-zone-text">Drop your logo here, or click to browse</div>
+                    <div class="drop-zone-hint">Square image · Minimum 512×512px recommended</div>
+                </div>
+                <div id="previewContainer" class="preview-container mt-3">
+                    <img id="previewImg" class="preview-img" src="" alt="" />
+                    <div class="preview-info">
+                        <div id="previewName" class="preview-name"></div>
+                        <div id="previewSize" class="preview-size"></div>
+                        <div id="previewDims" class="preview-size"></div>
+                    </div>
+                    <button class="btn-remove" id="removeIcon">✕</button>
+                </div>
+                <!-- Maskable preview -->
+                <div class="maskable-preview" id="maskablePreview">
+                    <div style="font-size: 0.78rem; color: var(--muted); width: 100%; margin-bottom: 0.25rem">
+                        🎭 <strong style="color: var(--text)">Maskable icon preview</strong> — como ficará em diferentes
+                        formatos de recorte Android:
+                    </div>
+                    <div class="mask-item mask-circle">
+                        <canvas id="maskCircle" width="64" height="64"></canvas><span>Circle</span>
+                    </div>
+                    <div class="mask-item mask-squircle">
+                        <canvas id="maskSquircle" width="64" height="64"></canvas><span>Squircle</span>
+                    </div>
+                    <div class="mask-item mask-square">
+                        <canvas id="maskSquare" width="64" height="64"></canvas><span>Square</span>
+                    </div>
+                    <div class="mask-item">
+                        <canvas id="maskFull" width="64" height="64"></canvas><span>Full (safe zone)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 02 App Info ─────────────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">02 — App Information</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>App Name <small style="color: var(--muted)">(max 45)</small></label>
+                        <input
+                            type="text"
+                            id="appName"
+                            class="form-control"
+                            maxlength="45"
+                            placeholder="My Awesome App"
+                        />
+                        <div class="char-count" id="nameCount">0 / 45</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Short Name <small style="color: var(--muted)">(max 12)</small></label>
+                        <input type="text" id="shortName" class="form-control" maxlength="12" placeholder="MyApp" />
+                        <div class="char-count" id="shortCount">0 / 12</div>
+                    </div>
+                    <div class="col-12">
+                        <label>Description <small style="color: var(--muted)">(max 300)</small></label>
+                        <textarea
+                            id="description"
+                            class="form-control"
+                            maxlength="300"
+                            rows="3"
+                            placeholder="A short description of what your app does..."
+                        ></textarea>
+                        <div class="char-count" id="descCount">0 / 300</div>
+                    </div>
+                    <div class="col-md-8">
+                        <label>Start URL / Base URL</label>
+                        <input type="url" id="startUrl" class="form-control" placeholder="https://example.com/app/" />
+                        <div class="field-error" id="urlError">Please enter a valid URL starting with https://</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Icon Path Prefix <small style="color: var(--muted)">(where icons live)</small></label>
+                        <input type="text" id="iconPath" class="form-control" placeholder="/ (root)" value="" />
+                        <div style="font-size: 0.72rem; color: var(--muted); margin-top: 3px">
+                            Ex: <code style="color: var(--accent)">img/</code> ou
+                            <code style="color: var(--accent)">assets/icons/</code>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>App Version</label>
+                        <input type="text" id="appVersion" class="form-control" placeholder="1.0.0" value="1.0.0" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Author / Organization</label>
+                        <input type="text" id="appAuthor" class="form-control" placeholder="Your Name or Org" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Language</label>
+                        <select id="appLang" class="form-select">
+                            <option value="en" data-locale="en_US">English</option>
+                            <option value="pt" data-locale="pt_BR">Portuguese (Brazil)</option>
+                            <option value="pt-PT" data-locale="pt_PT">Portuguese (Portugal)</option>
+                            <option value="es" data-locale="es_ES">Spanish</option>
+                            <option value="fr" data-locale="fr_FR">French</option>
+                            <option value="de" data-locale="de_DE">German</option>
+                            <option value="it" data-locale="it_IT">Italian</option>
+                            <option value="ja" data-locale="ja_JP">Japanese</option>
+                            <option value="zh" data-locale="zh_CN">Chinese (Simplified)</option>
+                            <option value="zh-TW" data-locale="zh_TW">Chinese (Traditional)</option>
+                            <option value="ko" data-locale="ko_KR">Korean</option>
+                            <option value="ar" data-locale="ar_SA">Arabic</option>
+                            <option value="ru" data-locale="ru_RU">Russian</option>
+                            <option value="nl" data-locale="nl_NL">Dutch</option>
+                            <option value="pl" data-locale="pl_PL">Polish</option>
+                            <option value="sv" data-locale="sv_SE">Swedish</option>
+                            <option value="tr" data-locale="tr_TR">Turkish</option>
+                            <option value="hi" data-locale="hi_IN">Hindi</option>
+                            <option value="id" data-locale="id_ID">Indonesian</option>
+                            <option value="vi" data-locale="vi_VN">Vietnamese</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Scope <small style="color: var(--muted)">(leave blank = start_url)</small></label>
+                        <input type="text" id="scope" class="form-control" placeholder="/" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>ID <small style="color: var(--muted)">(unique app identifier, optional)</small></label>
+                        <input type="text" id="appId" class="form-control" placeholder="com.example.myapp" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 03 Colors ───────────────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">03 — Colors</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>Theme Color</label>
+                        <div class="color-row">
+                            <div class="color-input-wrap">
+                                <input type="color" class="color-swatch" id="themeColorPicker" value="#7c6af7" />
+                                <input type="text" class="color-hex" id="themeColorHex" value="#7c6af7" maxlength="7" />
+                            </div>
+                            <span class="auto-badge" id="themeBadge">auto</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Background Color</label>
+                        <div class="color-row">
+                            <div class="color-input-wrap">
+                                <input type="color" class="color-swatch" id="bgColorPicker" value="#0a0a0f" />
+                                <input type="text" class="color-hex" id="bgColorHex" value="#0a0a0f" maxlength="7" />
+                            </div>
+                            <span class="auto-badge" id="bgBadge">auto</span>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem">
+                    🎨 Upload uma imagem para detectar automaticamente as 2 cores mais dominantes.
+                </p>
+            </div>
+
+            <!-- ── 04 Manifest Options ─────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">04 — Manifest Options</div>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label>Display Mode</label>
+                        <select id="display" class="form-select">
+                            <option value="standalone">standalone (recommended)</option>
+                            <option value="fullscreen">fullscreen</option>
+                            <option value="minimal-ui">minimal-ui</option>
+                            <option value="browser">browser</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Orientation</label>
+                        <select id="orientation" class="form-select">
+                            <option value="any">any (recommended)</option>
+                            <option value="natural">natural</option>
+                            <option value="portrait">portrait</option>
+                            <option value="portrait-primary">portrait-primary</option>
+                            <option value="portrait-secondary">portrait-secondary</option>
+                            <option value="landscape">landscape</option>
+                            <option value="landscape-primary">landscape-primary</option>
+                            <option value="landscape-secondary">landscape-secondary</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Text Direction</label>
+                        <select id="dir" class="form-select">
+                            <option value="auto">auto</option>
+                            <option value="ltr">ltr (left-to-right)</option>
+                            <option value="rtl">rtl (right-to-left)</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label>Categories (multi-select)</label>
+                        <select id="categories" class="form-select" multiple>
+                            <option value="books">Books</option>
+                            <option value="business">Business</option>
+                            <option value="education">Education</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="finance">Finance</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="food">Food</option>
+                            <option value="games">Games</option>
+                            <option value="government">Government</option>
+                            <option value="health">Health</option>
+                            <option value="kids">Kids</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="magazines">Magazines</option>
+                            <option value="medical">Medical</option>
+                            <option value="music">Music</option>
+                            <option value="navigation">Navigation</option>
+                            <option value="news">News</option>
+                            <option value="personalization">Personalization</option>
+                            <option value="photo">Photo</option>
+                            <option value="politics">Politics</option>
+                            <option value="productivity">Productivity</option>
+                            <option value="security">Security</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="social">Social</option>
+                            <option value="sports">Sports</option>
+                            <option value="travel">Travel</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="weather">Weather</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>IARC Rating ID <small style="color: var(--muted)">(optional)</small></label>
+                        <input type="text" id="iarc" class="form-control" placeholder="e.g. E10+" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Description curta (tagline) <small style="color: var(--muted)">(opcional)</small></label>
+                        <input
+                            type="text"
+                            id="tagline"
+                            class="form-control"
+                            maxlength="120"
+                            placeholder="The best app for..."
+                        />
+                    </div>
+                    <div class="col-12">
+                        <div class="row g-2">
+                            <div class="col-auto">
+                                <label
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
+                                >
+                                    <input type="checkbox" id="preferRelatedApps" style="accent-color: var(--accent)" />
+                                    prefer_related_applications
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id="includeShareTarget"
+                                        checked
+                                        style="accent-color: var(--accent)"
+                                    />
+                                    share_target (GET)
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id="includeProtocolHandlers"
+                                        style="accent-color: var(--accent)"
+                                    />
+                                    protocol_handlers (web+app)
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id="genMaskable"
+                                        checked
+                                        style="accent-color: var(--accent)"
+                                    />
+                                    Gerar ícone maskable dedicado
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
+                                >
+                                    <input type="checkbox" id="genSplash" style="accent-color: var(--accent)" />
+                                    Apple splash screens (iOS)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 05 Related Apps ─────────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">
+                    05 — Related Applications
+                    <small
+                        style="
+                            font-size: 0.6rem;
+                            color: var(--muted);
+                            letter-spacing: 0;
+                            text-transform: none;
+                            font-weight: 400;
+                        "
+                        >(opcional)</small
+                    >
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>Play Store App ID</label>
+                        <input type="text" id="playStoreId" class="form-control" placeholder="com.example.myapp" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>App Store ID</label>
+                        <input type="text" id="appStoreId" class="form-control" placeholder="123456789" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 06 Shortcuts ────────────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">
+                    06 — App Shortcuts
+                    <small
+                        style="
+                            font-size: 0.6rem;
+                            color: var(--muted);
+                            letter-spacing: 0;
+                            text-transform: none;
+                            font-weight: 400;
+                        "
+                        >(menu de contexto do ícone instalado · max 4)</small
+                    >
+                </div>
+                <div id="shortcutsList"></div>
+                <button class="btn-add" id="addShortcut">+ Adicionar shortcut</button>
+            </div>
+
+            <!-- ── 07 Live Preview ─────────────────────────────────── -->
+            <div class="section-card">
+                <div class="section-title">07 — Manifest Preview (tempo real)</div>
+                <div class="live-preview">
+                    <span class="live-badge">LIVE</span>
+                    <pre id="liveManifest">{}</pre>
+                </div>
+            </div>
+
+            <!-- ── Generate ────────────────────────────────────────── -->
+            <div style="text-align: center; margin: 2rem 0">
+                <button id="generateBtn" class="btn-generate" disabled><span>⚡</span> Generate PWA Package</button>
+                <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem" id="generateHint">
+                    Upload uma imagem para habilitar a geração
+                </p>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-wrap" id="progressWrap">
+                <div class="progress-text" id="progressText">Processando...</div>
+                <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
+            </div>
+
+            <!-- ── Output ──────────────────────────────────────────── -->
+            <div class="output-section" id="outputSection">
+                <div class="section-card">
+                    <div class="section-title">✅ Arquivos Gerados</div>
+                    <div class="d-flex gap-3 flex-wrap align-items-center">
+                        <a id="downloadZip" class="download-btn">📦 Download icons.zip</a>
+                        <div style="font-size: 0.82rem; color: var(--muted)" id="zipContents"></div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">🖼️ Icon Preview</div>
+                    <div class="icon-grid" id="iconGrid"></div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">📋 Code Output</div>
+                    <div class="output-tabs">
+                        <button class="tab-btn active" data-tab="headTab">HTML Head</button>
+                        <button class="tab-btn" data-tab="manifestTab">manifest.json</button>
+                        <button class="tab-btn" data-tab="swTab">service-worker.js</button>
+                        <button class="tab-btn" data-tab="jsonldTab">JSON-LD</button>
+                        <button class="tab-btn" data-tab="offlineTab">offline.html</button>
+                        <button class="tab-btn" data-tab="robotsTab">robots.txt</button>
+                    </div>
+                    <div class="tab-content active" id="headTab">
+                        <div class="code-block">
+                            <button class="btn-copy" onclick="copyCode('headCode')">copy</button>
+                            <pre id="headCode"></pre>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="manifestTab">
+                        <div class="code-block">
+                            <button class="btn-copy" onclick="copyCode('manifestCode')">copy</button>
+                            <pre id="manifestCode"></pre>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="swTab">
+                        <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
+                            ⚙️ Coloque na <strong style="color: var(--text)">raiz do site</strong> (mesmo nível do
+                            index.html). O registro está incluído no HTML Head.
+                        </div>
+                        <div class="code-block">
+                            <button class="btn-copy" onclick="copyCode('swCode')">copy</button>
+                            <pre id="swCode"></pre>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="jsonldTab">
+                        <div class="code-block">
+                            <button class="btn-copy" onclick="copyCode('jsonldCode')">copy</button>
+                            <pre id="jsonldCode"></pre>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="offlineTab">
+                        <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
+                            📴 Página exibida quando o usuário está offline e a página não está em cache. Salve como
+                            <strong style="color: var(--text)">offline.html</strong> na raiz.
+                        </div>
+                        <div class="code-block">
+                            <button class="btn-copy" onclick="copyCode('offlineCode')">copy</button>
+                            <pre id="offlineCode"></pre>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="robotsTab">
+                        <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
+                            🤖 <strong style="color: var(--text)">robots.txt</strong> +
+                            <strong style="color: var(--text)">sitemap.xml</strong> básicos gerados com sua URL.
+                        </div>
+                        <div class="code-block" style="margin-bottom: 0.75rem">
+                            <button class="btn-copy" onclick="copyCode('robotsCode')">copy robots.txt</button>
+                            <pre id="robotsCode"></pre>
+                        </div>
+                        <div class="code-block">
+                            <button class="btn-copy" onclick="copyCode('sitemapCode')">copy sitemap.xml</button>
+                            <pre id="sitemapCode"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky regen -->
+            <div class="sticky-regen" id="stickyRegen">
+                <button class="btn-regen" id="regenBtn">↺ Regenerar com dados atuais</button>
+            </div>
+        </div>
+        <!-- /main-container -->
+
+        <!-- Toast container -->
+        <div class="toast-container" id="toastContainer"></div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
