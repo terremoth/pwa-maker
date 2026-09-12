@@ -18,6 +18,135 @@
         />
         <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PWA Maker</title>
+        <meta name="title" content="PWA Maker">
+        <meta name="description" content="Create a complete PWA, easy and fast">
+        <meta name="keywords" content="productivity, utilities">
+        <meta name="author" content="Terremoth @ Imaginum Softworks">
+        <meta name="language" content="en">
+        <meta name="robots" content="index, follow">
+        <meta name="revisit-after" content="7 days">
+        <meta name="generator" content="PWA Maker">
+        <link rel="canonical" href="https://terremoth.github.io/pwa-maker/">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Open Graph / Facebook / LinkedIn / WhatsApp    -->
+        <!-- ══════════════════════════════════════════════ -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://terremoth.github.io/pwa-maker/">
+        <meta property="og:title" content="PWA Maker">
+        <meta property="og:description" content="Create a complete PWA, easy and fast">
+        <meta property="og:image" content="https://terremoth.github.io/pwa-maker/img/social-preview-github.png">
+        <meta property="og:image:secure_url" content="https://terremoth.github.io/pwa-maker/img/social-preview-github.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="1280">
+        <meta property="og:image:height" content="640">
+        <meta property="og:image:alt" content="PWA Maker">
+        <meta property="og:locale" content="en_US">
+        <meta property="og:site_name" content="PWA Maker">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Twitter / X                                    -->
+        <!-- ══════════════════════════════════════════════ -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@yourhandle">
+        <meta name="twitter:creator" content="@yourhandle">
+        <meta name="twitter:url" content="https://terremoth.github.io/pwa-maker/">
+        <meta name="twitter:title" content="PWA Maker">
+        <meta name="twitter:description" content="Create a complete PWA, easy and fast">
+        <meta name="twitter:image" content="https://terremoth.github.io/pwa-maker/img/social-preview-github.png">
+        <meta name="twitter:image:alt" content="PWA Maker">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Pinterest                                      -->
+        <!-- ══════════════════════════════════════════════ -->
+        <meta name="pinterest-rich-pin" content="true">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Microsoft / Windows / Edge                     -->
+        <!-- ══════════════════════════════════════════════ -->
+        <meta name="msapplication-TileColor" content="#8060e0">
+        <meta name="msapplication-TileImage" content="img/icon-192.png">
+        <meta name="msapplication-tooltip" content="Create a complete PWA, easy and fast">
+        <meta name="msapplication-starturl" content="https://terremoth.github.io/pwa-maker/">
+        <meta name="msapplication-navbutton-color" content="#e0e0ff">
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <meta name="msapplication-task" content="name=PWA Maker;action-uri=https://terremoth.github.io/pwa-maker/;icon-uri=img/icon-32.png">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Apple / iOS / Safari                           -->
+        <!-- ══════════════════════════════════════════════ -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="PWA Maker">
+        <meta name="format-detection" content="telephone=no">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- PWA / Theme Color                              -->
+        <!-- ══════════════════════════════════════════════ -->
+        <meta name="theme-color" content="#e0e0ff">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="PWA Maker">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Favicon & Icons                                -->
+        <!-- ══════════════════════════════════════════════ -->
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/icon-16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/icon-32.png">
+        <link rel="icon" type="image/png" sizes="64x64" href="img/icon-64.png">
+        <link rel="icon" type="image/png" sizes="128x128" href="img/icon-128.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="img/icon-512.png">
+        <link rel="apple-touch-icon" href="img/icon-192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/icon-192.png">
+        <link rel="apple-touch-icon" sizes="512x512" href="img/icon-512.png">
+        <link rel="mask-icon" href="img/icon-512.png" color="#e0e0ff">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Manifest                                       -->
+        <!-- ══════════════════════════════════════════════ -->
+        <link rel="manifest" href="manifest.json">
+        
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- Service Worker + PWA Install Prompt            -->
+        <!-- (place before </body> or keep here)            -->
+        <!-- ══════════════════════════════════════════════ -->
+        <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js').then(reg => {
+              console.log('[PWA] SW registered, scope:', reg.scope);
+              reg.addEventListener('updatefound', () => {
+                const nw = reg.installing;
+                nw.addEventListener('statechange', () => {
+                  if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+                    if (confirm('Nova versão disponível! Recarregar?')) {
+                      nw.postMessage({ type: 'SKIP_WAITING' });
+                      location.reload();
+                    }
+                  }
+                });
+              });
+            }).catch(err => console.error('[PWA] SW failed:', err));
+          });
+        }
+        
+        let _installPrompt = null;
+        window.addEventListener('beforeinstallprompt', e => {
+          e.preventDefault(); _installPrompt = e;
+          // Show your install button: document.getElementById('btn-install').hidden = false;
+        });
+        function installPWA() {
+          if (!_installPrompt) return;
+          _installPrompt.prompt();
+          _installPrompt.userChoice.then(() => { _installPrompt = null; });
+        }
+        window.addEventListener('appinstalled', () => console.log('[PWA] App installed!'));
+        </script>
     </head>
     <body>
         <header>
