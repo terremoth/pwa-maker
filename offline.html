@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Maker — Offline</title>
+  <meta name="theme-color" content="#e0e0ff">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#8060e0;color:#e8e8f0;font-family:system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;gap:1.5rem}
+    .icon{width:80px;height:80px;object-fit:contain;border-radius:16px;opacity:.8}
+    .emoji{font-size:4rem}
+    h1{font-size:1.75rem;font-weight:700;color:#fff}
+    p{color:#9999b3;font-size:1rem;max-width:340px;line-height:1.6}
+    .btn{display:inline-block;margin-top:.5rem;background:#e0e0ff;color:#fff;border:none;padding:.75rem 1.75rem;border-radius:8px;font-size:1rem;cursor:pointer;text-decoration:none;font-family:inherit;transition:opacity .2s}
+    .btn:hover{opacity:.85}
+    .status{font-size:.8rem;color:#6b6b8a;margin-top:1rem}
+  </style>
+</head>
+<body>
+  <div class="emoji">📡</div>
+  <img src="icon-192.png" class="icon" alt="PWA Maker" onerror="this.style.display='none'">
+  <h1>PWA Maker</h1>
+  <p>Você está offline. Verifique sua conexão com a internet e tente novamente.</p>
+  <button class="btn" onclick="window.location.reload()">↺ Tentar novamente</button>
+  <p class="status" id="status"></p>
+  <script>
+    window.addEventListener('online', () => window.location.reload());
+    document.getElementById('status').textContent =
+      'Última tentativa: ' + new Date().toLocaleTimeString();
+  </script>
+</body>
+</html>

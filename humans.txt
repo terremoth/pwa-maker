@@ -1,0 +1,13 @@
+/* TEAM */
+  Developer / Designer: Terremoth @ Imaginum Softworks
+  Site: https://terremoth.github.io/pwa-maker/
+
+/* THANKS */
+  Generated with PWA Maker
+  https://github.com/
+
+/* SITE */
+  Last update: 2026-09-12
+  Language: en
+  Standards: HTML5, CSS3, Service Worker, Web App Manifest
+  Components: Progressive Web App (PWA)

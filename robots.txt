@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://terremoth.github.io/pwa-maker/sitemap.xml
+
+# Common crawl exclusions (adjust as needed)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$

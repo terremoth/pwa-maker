@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="icon-64.png"/>
+      <square150x150logo src="icon-128.png"/>
+      <square310x310logo src="icon-256.png"/>
+      <wide310x150logo src="social-preview-github.png"/>
+      <TileColor>#8060e0</TileColor>
+    </tile>
+    <notification>
+      <polling-uri src="https://terremoth.github.io/pwa-maker/notifications/feed.xml"/>
+      <frequency>30</frequency>
+      <cycle>1</cycle>
+    </notification>
+  </msapplication>
+</browserconfig>
