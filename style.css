@@ -205,7 +205,6 @@ label {
 .drop-zone-hint {
     font-size: 0.78rem;
     color: var(--muted);
-    opacity: 0.6;
     margin-top: 0.4rem;
 }
 .preview-container {
