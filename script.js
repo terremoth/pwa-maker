@@ -11,6 +11,20 @@ $(function () {
     $("#appLang").select2({ theme: "bootstrap-5", dropdownParent: $("body"), minimumResultsForSearch: 0 });
     $("#appLang").trigger("change.select2");
 });
+$('select').select2();
+
+$('select.select2-hidden-accessible').each(function () {
+    const $select = $(this);
+    const $selection = $select
+        .next('.select2')
+        .find('.select2-selection');
+
+    const ariaLabel = $select.attr('aria-label');
+
+    if (ariaLabel) {
+        $selection.attr('aria-label', ariaLabel);
+    }
+});
 
 // ════════════════════════════════════════════════════
 // STATE
