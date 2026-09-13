@@ -17,7 +17,7 @@ $(function () {
 
     $("#appLang").trigger("change.select2");
 
-    // Accessibility: give the generated Select2 selection an accessible name
+    // Accessible name for Select2's generated selection
     $('select.select2-hidden-accessible').each(function () {
         const $select = $(this);
         const ariaLabel = $select.attr('aria-label');
@@ -29,7 +29,15 @@ $(function () {
                 .attr('aria-label', ariaLabel);
         }
     });
+
+    // Fix Select2 search field ARIA
+    $(document).on('select2:open', function () {
+        $('.select2-search__field')
+            .removeAttr('role')
+            .removeAttr('aria-autocomplete');
+    });
 });
+
 
 // ════════════════════════════════════════════════════
 // STATE
