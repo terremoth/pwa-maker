@@ -315,7 +315,7 @@ label {
     letter-spacing: 1px;
     text-transform: uppercase;
     background: rgba(124, 106, 247, 0.2);
-    color: var(--accent);
+    color: #b8adff;
     padding: 2px 8px;
     border-radius: 20px;
     font-weight: 600;
