@@ -43,7 +43,14 @@ body::before {
     z-index: 9999;
     opacity: 0.4;
 }
+.select2-container .select2-search__field {
+  color: #e8e8f0;
+}
 
+.select2-container .select2-search__field::placeholder {
+  color: #e8e8f0;
+  opacity: 1;
+}
 header {
     padding: 3rem 0 2rem;
     text-align: center;
