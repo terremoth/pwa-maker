@@ -168,7 +168,7 @@ function loadImage(file) {
             document.getElementById("previewName").textContent = file.name;
             document.getElementById("previewSize").textContent = formatBytes(file.size);
             document.getElementById("previewDims").textContent =
-                `${imgW}×${imgH}px${imgW < 512 || imgH < 512 ? " ⚠️ Recomendado 512px+" : " ✅"}`;
+                `${imgW}×${imgH}px${imgW < 512 || imgH < 512 ? " ⚠️ Recommended 512px+" : " ✅"}`;
             document.getElementById("previewContainer").style.display = "flex";
             dropZone.style.display = "none";
             document.getElementById("generateBtn").disabled = false;
@@ -450,9 +450,9 @@ function addShortcut(data = {}) {
     const html = `<div class="shortcut-item" id="shortcut-${id}">
     <button class="btn-remove-shortcut" onclick="removeShortcut(${id})">✕</button>
     <div class="row g-2">
-      <div class="col-md-5"><label>Nome</label><input type="text" class="form-control sc-name" placeholder="Ex: Nova Tarefa" value="${esc(data.name || "")}"></div>
+      <div class="col-md-5"><label>Name</label><input type="text" class="form-control sc-name" placeholder="Ex: Nova Tarefa" value="${esc(data.name || "")}"></div>
       <div class="col-md-4"><label>URL</label><input type="text" class="form-control sc-url" placeholder="/novo" value="${esc(data.url || "")}"></div>
-      <div class="col-md-3"><label>Descrição</label><input type="text" class="form-control sc-desc" placeholder="Opcional" value="${esc(data.description || "")}"></div>
+      <div class="col-md-3"><label>Description</label><input type="text" class="form-control sc-desc" placeholder="Opcional" value="${esc(data.description || "")}"></div>
     </div>
   </div>`;
     document.getElementById("shortcutsList").insertAdjacentHTML("beforeend", html);
@@ -822,13 +822,13 @@ function buildOfflineHtml(manifest) {
   <div class="emoji">📡</div>
   <img src="${ip}icon-192.png" class="icon" alt="${name}" onerror="this.style.display='none'">
   <h1>${name}</h1>
-  <p>Você está offline. Verifique sua conexão com a internet e tente novamente.</p>
-  <button class="btn" onclick="window.location.reload()">↺ Tentar novamente</button>
+  <p>You are OFFLINE. Verify your internet connection and try again.</p>
+  <button class="btn" onclick="window.location.reload()">↺ Try again</button>
   <p class="status" id="status"></p>
   <script>
     window.addEventListener('online', () => window.location.reload());
     document.getElementById('status').textContent =
-      'Última tentativa: ' + new Date().toLocaleTimeString();
+      'Lest try: ' + new Date().toLocaleTimeString();
   <\/script>
 </body>
 </html>`;
@@ -1201,7 +1201,7 @@ function buildHeadCode(manifest) {
         `        const nw = reg.installing;`,
         `        nw.addEventListener('statechange', () => {`,
         `          if (nw.state === 'installed' && navigator.serviceWorker.controller) {`,
-        `            if (confirm('Nova versão disponível! Recarregar?')) {`,
+        `            if (confirm('New version available! Do you wish to reload?')) {`,
         `              nw.postMessage({ type: 'SKIP_WAITING' });`,
         `              location.reload();`,
         `            }`,
@@ -1299,11 +1299,11 @@ document.getElementById("regenBtn").addEventListener("click", generate);
 
 async function generate() {
     if (!validateUrl() && v("startUrl")) {
-        showToast("URL inválida. Corrija antes de gerar.", "error");
+        showToast("Invalid URL. Fix before generate.", "error");
         return;
     }
     if (!srcCanvas) {
-        showToast("Upload uma imagem primeiro.", "error");
+        showToast("First upload an image!", "error");
         return;
     }
 
@@ -1326,7 +1326,7 @@ async function generate() {
         const s = iconSizes[i];
         const c = resizeCanvas(srcCanvas, s, s);
         zip.file(`${ip}icon-${s}.png`, await canvasToBuffer(c));
-        setProgress(5 + i * 7, `Gerando icon-${s}.png...`);
+        setProgress(5 + i * 7, `Generating icon-${s}.png...`);
         // preview
         const div = document.createElement("div");
         div.className = "icon-item";
@@ -1357,17 +1357,17 @@ async function generate() {
         iconGridEl.appendChild(div);
     }
 
-    setProgress(62, "Gerando favicon.ico...");
+    setProgress(62, "Generating favicon.ico...");
     zip.file(`${ip}favicon.ico`, await buildIco(srcCanvas));
 
-    setProgress(66, "Gerando social preview...");
+    setProgress(66, "Generating social preview...");
     const social = buildSocialPreview(srcCanvas);
     zip.file(`${ip}social-preview-github.png`, await canvasToBuffer(social));
 
     // ── Apple splash screens ──
     let splashCount = 0;
     if (document.getElementById("genSplash").checked) {
-        setProgress(70, "Gerando Apple splash screens...");
+        setProgress(70, "Generating Apple splash screens...");
         for (const sp of SPLASH_SIZES) {
             const c = buildSplash(srcCanvas, sp.w, sp.h);
             zip.file(`${ip}splash-${sp.w}x${sp.h}.png`, await canvasToBuffer(c));
@@ -1375,30 +1375,30 @@ async function generate() {
         }
     }
 
-    setProgress(78, "Gerando manifest.json...");
+    setProgress(78, "Generating manifest.json...");
     zip.file("manifest.json", JSON.stringify(manifest, null, 2));
 
-    setProgress(81, "Gerando service-worker.js...");
+    setProgress(81, "Generating service-worker.js...");
     const swContent = buildServiceWorker(manifest);
     zip.file("service-worker.js", swContent);
 
-    setProgress(83, "Gerando offline.html...");
+    setProgress(83, "Generating offline.html...");
     const offlineHtml = buildOfflineHtml(manifest);
     zip.file("offline.html", offlineHtml);
 
-    setProgress(85, "Gerando browserconfig.xml...");
+    setProgress(85, "Generating browserconfig.xml...");
     zip.file("browserconfig.xml", buildBrowserConfig(manifest, ip));
 
-    setProgress(87, "Gerando robots.txt & sitemap.xml...");
+    setProgress(87, "Generating robots.txt & sitemap.xml...");
     const robotsTxt = buildRobotsTxt(manifest.start_url);
     const sitemapXml = buildSitemapXml(manifest.start_url);
     zip.file("robots.txt", robotsTxt);
     zip.file("sitemap.xml", sitemapXml);
 
-    setProgress(89, "Gerando humans.txt...");
+    setProgress(89, "Generating humans.txt...");
     zip.file("humans.txt", buildHumansTxt(manifest));
 
-    setProgress(92, "Comprimindo ZIP...");
+    setProgress(92, "Compressing ZIP...");
     const zipBlob = await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 6 } });
     const zipUrl = URL.createObjectURL(zipBlob);
     const dl = document.getElementById("downloadZip");
@@ -1411,9 +1411,9 @@ async function generate() {
     fileCount += 3; // browserconfig, robots, sitemap, humans
     if (document.getElementById("genSplash").checked) fileCount += splashCount;
     const zipKb = (zipBlob.size / 1024).toFixed(0);
-    document.getElementById("zipContents").textContent = `${fileCount} arquivos · ${zipKb} KB`;
+    document.getElementById("zipContents").textContent = `${fileCount} files · ${zipKb} KB`;
 
-    setProgress(96, "Gerando snippets de código...");
+    setProgress(96, "Generating code snippets...");
     const headCode = buildHeadCode(manifest);
     const jsonldCode = buildJsonLd(manifest);
 
@@ -1441,14 +1441,14 @@ async function generate() {
     sitemapPre.dataset.raw = sitemapXml;
     sitemapPre.textContent = sitemapXml;
 
-    setProgress(100, "Pronto! ✅");
+    setProgress(100, "Ready! ✅");
     setTimeout(() => {
         showProgress(false);
         document.getElementById("outputSection").style.display = "block";
         document.getElementById("outputSection").scrollIntoView({ behavior: "smooth" });
         document.getElementById("stickyRegen").classList.add("show");
         btn.disabled = false;
-        showToast("PWA package gerado com sucesso! 🎉", "success");
+        showToast("PWA package succesfully generated! 🎉", "success");
     }, 500);
 }
 
@@ -1497,9 +1497,9 @@ async function copyCode(id) {
                 setTimeout(() => (b.textContent = "copy"), 1800);
             }
         });
-        showToast("Copiado!", "success");
+        showToast("Copied!", "success");
     } catch {
-        showToast("Falha ao copiar.", "error");
+        showToast("Failed to copy.", "error");
     }
 }
 
