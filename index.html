@@ -177,7 +177,7 @@
                 </div>
                 <!-- Maskable preview -->
                 <div class="maskable-preview" id="maskablePreview">
-                    <div style="font-size: 0.78rem; color: var(--muted); width: 100%; margin-bottom: 0.25rem">
+                    <div style="color: var(--muted); width: 100%; margin-bottom: 0.25rem">
                         🎭 <strong style="color: var(--text)">Maskable icon preview</strong> — como ficará em diferentes
                         formatos de recorte Android:
                     </div>
@@ -235,7 +235,7 @@
                     <div class="col-md-4">
                         <label>Icon Path Prefix <small style="color: var(--muted)">(where icons live)</small></label>
                         <input type="text" id="iconPath" class="form-control" placeholder="/ (root)" value="" />
-                        <div style="font-size: 0.72rem; color: var(--muted); margin-top: 3px">
+                        <div style="color: var(--muted); margin-top: 3px">
                             Ex: <code style="color: var(--accent)">img/</code> ou
                             <code style="color: var(--accent)">assets/icons/</code>
                         </div>
@@ -309,7 +309,7 @@
                         </div>
                     </div>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem">
+                <p style="color: var(--muted); margin-top: 0.75rem">
                     🎨 Upload uma imagem para detectar automaticamente as 2 cores mais dominantes.
                 </p>
             </div>
@@ -398,10 +398,7 @@
                     <div class="col-12">
                         <div class="row g-2">
                             <div class="col-auto">
-                                <label
-                                    class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
-                                >
+                                <label class="d-flex align-items-center gap-2" style="color: var(--text); cursor: pointer;">
                                     <input type="checkbox" id="preferRelatedApps" style="accent-color: var(--accent)" />
                                     prefer_related_applications
                                 </label>
@@ -409,8 +406,7 @@
                             <div class="col-auto">
                                 <label
                                     class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
-                                >
+                                    style="color: var(--text); cursor: pointer;">
                                     <input
                                         type="checkbox"
                                         id="includeShareTarget"
@@ -423,8 +419,7 @@
                             <div class="col-auto">
                                 <label
                                     class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
-                                >
+                                    style="color: var(--text); cursor: pointer;">
                                     <input
                                         type="checkbox"
                                         id="includeProtocolHandlers"
@@ -436,8 +431,7 @@
                             <div class="col-auto">
                                 <label
                                     class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
-                                >
+                                    style="color: var(--text); cursor: pointer;">
                                     <input
                                         type="checkbox"
                                         id="genMaskable"
@@ -450,8 +444,7 @@
                             <div class="col-auto">
                                 <label
                                     class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer; font-size: 0.88rem"
-                                >
+                                    style="color: var(--text); cursor: pointer;">
                                     <input type="checkbox" id="genSplash" style="accent-color: var(--accent)" />
                                     Apple splash screens (iOS)
                                 </label>
@@ -467,7 +460,6 @@
                     05 — Related Applications
                     <small
                         style="
-                            font-size: 0.6rem;
                             color: var(--muted);
                             letter-spacing: 0;
                             text-transform: none;
@@ -494,7 +486,6 @@
                     06 — App Shortcuts
                     <small
                         style="
-                            font-size: 0.6rem;
                             color: var(--muted);
                             letter-spacing: 0;
                             text-transform: none;
@@ -519,7 +510,7 @@
             <!-- ── Generate ────────────────────────────────────────── -->
             <div style="text-align: center; margin: 2rem 0">
                 <button id="generateBtn" class="btn-generate" disabled><span>⚡</span> Generate PWA Package</button>
-                <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem" id="generateHint">
+                <p style="color: var(--muted); margin-top: 0.75rem" id="generateHint">
                     Upload uma imagem para habilitar a geração
                 </p>
             </div>
@@ -536,7 +527,7 @@
                     <div class="section-title">✅ Arquivos Gerados</div>
                     <div class="d-flex gap-3 flex-wrap align-items-center">
                         <a id="downloadZip" class="download-btn">📦 Download icons.zip</a>
-                        <div style="font-size: 0.82rem; color: var(--muted)" id="zipContents"></div>
+                        <div style="color: var(--muted)" id="zipContents"></div>
                     </div>
                 </div>
 
@@ -568,7 +559,7 @@
                         </div>
                     </div>
                     <div class="tab-content" id="swTab">
-                        <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
+                        <div style="color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
                             ⚙️ Coloque na <strong style="color: var(--text)">raiz do site</strong> (mesmo nível do
                             index.html). O registro está incluído no HTML Head.
                         </div>
@@ -584,7 +575,7 @@
                         </div>
                     </div>
                     <div class="tab-content" id="offlineTab">
-                        <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
+                        <div style="color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
                             📴 Página exibida quando o usuário está offline e a página não está em cache. Salve como
                             <strong style="color: var(--text)">offline.html</strong> na raiz.
                         </div>
@@ -594,7 +585,7 @@
                         </div>
                     </div>
                     <div class="tab-content" id="robotsTab">
-                        <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
+                        <div style="color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
                             🤖 <strong style="color: var(--text)">robots.txt</strong> +
                             <strong style="color: var(--text)">sitemap.xml</strong> básicos gerados com sua URL.
                         </div>
