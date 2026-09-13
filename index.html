@@ -167,7 +167,7 @@
                     <div class="drop-zone-hint">Square image · Minimum 512×512px recommended</div>
                 </div>
                 <div id="previewContainer" class="preview-container mt-3">
-                    <img id="previewImg" class="preview-img" src="" alt="" />
+                    <img id="previewImg" class="preview-img" src="" alt="Preview" />
                     <div class="preview-info">
                         <div id="previewName" class="preview-name"></div>
                         <div id="previewSize" class="preview-size"></div>
@@ -201,7 +201,7 @@
                 <div class="section-title">02 — App Information</div>
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label>App Name <small style="color: var(--muted)">(max 45)</small></label>
+                        <label for="appName">App Name <small style="color: var(--muted)">(max 45)</small></label>
                         <input
                             type="text"
                             id="appName"
@@ -212,12 +212,12 @@
                         <div class="char-count" id="nameCount">0 / 45</div>
                     </div>
                     <div class="col-md-6">
-                        <label>Short Name <small style="color: var(--muted)">(max 12)</small></label>
+                        <label for="shortName">Short Name <small style="color: var(--muted)">(max 12)</small></label>
                         <input type="text" id="shortName" class="form-control" maxlength="12" placeholder="MyApp" />
                         <div class="char-count" id="shortCount">0 / 12</div>
                     </div>
                     <div class="col-12">
-                        <label>Description <small style="color: var(--muted)">(max 300)</small></label>
+                        <label for="description">Description <small style="color: var(--muted)">(max 300)</small></label>
                         <textarea
                             id="description"
                             class="form-control"
@@ -228,12 +228,12 @@
                         <div class="char-count" id="descCount">0 / 300</div>
                     </div>
                     <div class="col-md-8">
-                        <label>Start URL / Base URL</label>
+                        <label for="startUrl">Start URL / Base URL</label>
                         <input type="url" id="startUrl" class="form-control" placeholder="https://example.com/app/" />
                         <div class="field-error" id="urlError">Please enter a valid URL starting with https://</div>
                     </div>
                     <div class="col-md-4">
-                        <label>Icon Path Prefix <small style="color: var(--muted)">(where icons live)</small></label>
+                        <label for="iconPath">Icon Path Prefix <small style="color: var(--muted)">(where icons live)</small></label>
                         <input type="text" id="iconPath" class="form-control" placeholder="/ (root)" value="" />
                         <div style="color: var(--muted); margin-top: 3px">
                             Ex: <code style="color: var(--accent)">img/</code> ou
@@ -241,15 +241,15 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>App Version</label>
+                        <label for="appVersion">App Version</label>
                         <input type="text" id="appVersion" class="form-control" placeholder="1.0.0" value="1.0.0" />
                     </div>
                     <div class="col-md-4">
-                        <label>Author / Organization</label>
+                        <label for="appAuthor">Author / Organization</label>
                         <input type="text" id="appAuthor" class="form-control" placeholder="Your Name or Org" />
                     </div>
                     <div class="col-md-4">
-                        <label>Language</label>
+                        <label for="appLang">Language</label>
                         <select id="appLang" class="form-select">
                             <option value="en" data-locale="en_US">English</option>
                             <option value="pt" data-locale="pt_BR">Portuguese (Brazil)</option>
@@ -274,11 +274,11 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label>Scope <small style="color: var(--muted)">(leave blank = start_url)</small></label>
+                        <label for="scope">Scope <small style="color: var(--muted)">(leave blank = start_url)</small></label>
                         <input type="text" id="scope" class="form-control" placeholder="/" />
                     </div>
                     <div class="col-md-6">
-                        <label>ID <small style="color: var(--muted)">(unique app identifier, optional)</small></label>
+                        <label for="appId">ID <small style="color: var(--muted)">(unique app identifier, optional)</small></label>
                         <input type="text" id="appId" class="form-control" placeholder="com.example.myapp" />
                     </div>
                 </div>
@@ -289,7 +289,8 @@
                 <div class="section-title">03 — Colors</div>
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label>Theme Color</label>
+                        <label for="themeColorPicker">Theme Color</label>
+                        <label for="themeColorHex" style="display:none;visibility:hidden">Theme Color Hex</label>
                         <div class="color-row">
                             <div class="color-input-wrap">
                                 <input type="color" class="color-swatch" id="themeColorPicker" value="#7c6af7" />
@@ -299,7 +300,8 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label>Background Color</label>
+                        <label for="bgColorPicker">Background Color</label>
+                        <label for="bgColorHex" style="display:none;visibility:hidden">Background Color Hex</label>
                         <div class="color-row">
                             <div class="color-input-wrap">
                                 <input type="color" class="color-swatch" id="bgColorPicker" value="#0a0a0f" />
@@ -319,7 +321,7 @@
                 <div class="section-title">04 — Manifest Options</div>
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <label>Display Mode</label>
+                        <label for="display">Display Mode</label>
                         <select id="display" class="form-select">
                             <option value="standalone">standalone (recommended)</option>
                             <option value="fullscreen">fullscreen</option>
@@ -328,7 +330,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label>Orientation</label>
+                        <label for="orientation">Orientation</label>
                         <select id="orientation" class="form-select">
                             <option value="any">any (recommended)</option>
                             <option value="natural">natural</option>
@@ -341,7 +343,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label>Text Direction</label>
+                        <label for="dir">Text Direction</label>
                         <select id="dir" class="form-select">
                             <option value="auto">auto</option>
                             <option value="ltr">ltr (left-to-right)</option>
@@ -349,7 +351,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <label>Categories (multi-select)</label>
+                        <label for="categories">Categories (multi-select)</label>
                         <select id="categories" class="form-select" multiple>
                             <option value="books">Books</option>
                             <option value="business">Business</option>
@@ -382,11 +384,11 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label>IARC Rating ID <small style="color: var(--muted)">(optional)</small></label>
+                        <label for="iarc">IARC Rating ID <small style="color: var(--muted)">(optional)</small></label>
                         <input type="text" id="iarc" class="form-control" placeholder="e.g. E10+" />
                     </div>
                     <div class="col-md-6">
-                        <label>Description curta (tagline) <small style="color: var(--muted)">(opcional)</small></label>
+                        <label for="tagline">Description curta (tagline) <small style="color: var(--muted)">(opcional)</small></label>
                         <input
                             type="text"
                             id="tagline"
@@ -398,54 +400,56 @@
                     <div class="col-12">
                         <div class="row g-2">
                             <div class="col-auto">
-                                <label class="d-flex align-items-center gap-2" style="color: var(--text); cursor: pointer;">
-                                    <input type="checkbox" id="preferRelatedApps" style="accent-color: var(--accent)" />
-                                    prefer_related_applications
-                                </label>
+                                <input type="checkbox" id="preferRelatedApps" style="accent-color: var(--accent)" />    
+                                <label for="preferRelatedApps" class="d-flex align-items-center gap-2" style="color: var(--text); cursor: pointer;">prefer_related_applications</label>
                             </div>
                             <div class="col-auto">
-                                <label
-                                    class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer;">
-                                    <input
+                                 <input
                                         type="checkbox"
                                         id="includeShareTarget"
                                         checked
                                         style="accent-color: var(--accent)"
                                     />
+                                <label
+                                    for="includeShareTarget"
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer;">
                                     share_target (GET)
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <label
-                                    class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer;">
-                                    <input
+                                 <input
                                         type="checkbox"
                                         id="includeProtocolHandlers"
                                         style="accent-color: var(--accent)"
                                     />
+                                <label
+                                    for="includeProtocolHandlers"
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer;">
                                     protocol_handlers (web+app)
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <label
-                                    class="d-flex align-items-center gap-2"
-                                    style="color: var(--text); cursor: pointer;">
-                                    <input
+                                <input
                                         type="checkbox"
                                         id="genMaskable"
                                         checked
                                         style="accent-color: var(--accent)"
                                     />
+                                <label
+                                    for="genMaskable"
+                                    class="d-flex align-items-center gap-2"
+                                    style="color: var(--text); cursor: pointer;">
                                     Gerar ícone maskable dedicado
                                 </label>
                             </div>
                             <div class="col-auto">
+                                <input type="checkbox" id="genSplash" style="accent-color: var(--accent)" />
                                 <label
+                                    for="genSplash"
                                     class="d-flex align-items-center gap-2"
                                     style="color: var(--text); cursor: pointer;">
-                                    <input type="checkbox" id="genSplash" style="accent-color: var(--accent)" />
                                     Apple splash screens (iOS)
                                 </label>
                             </div>
@@ -470,11 +474,11 @@
                 </div>
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label>Play Store App ID</label>
+                        <label for="playStoreId">Play Store App ID</label>
                         <input type="text" id="playStoreId" class="form-control" placeholder="com.example.myapp" />
                     </div>
                     <div class="col-md-6">
-                        <label>App Store ID</label>
+                        <label for="appStoreId">App Store ID</label>
                         <input type="text" id="appStoreId" class="form-control" placeholder="123456789" />
                     </div>
                 </div>
