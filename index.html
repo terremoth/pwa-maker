@@ -178,8 +178,8 @@
                 <!-- Maskable preview -->
                 <div class="maskable-preview" id="maskablePreview">
                     <div style="color: var(--muted); width: 100%; margin-bottom: 0.25rem">
-                        🎭 <strong style="color: var(--text)">Maskable icon preview</strong> — como ficará em diferentes
-                        formatos de recorte Android:
+                        🎭 <strong style="color: var(--text)">Maskable icon preview</strong> — 
+                        How it will look like in different Android cropped formats:
                     </div>
                     <div class="mask-item mask-circle">
                         <canvas id="maskCircle" width="64" height="64"></canvas><span>Circle</span>
@@ -252,9 +252,9 @@
                         <label for="appLang">Language</label>
                         <select id="appLang" class="form-select">
                             <option value="en" data-locale="en_US">English</option>
+                            <option value="es" data-locale="es_ES">Spanish</option>
                             <option value="pt" data-locale="pt_BR">Portuguese (Brazil)</option>
                             <option value="pt-PT" data-locale="pt_PT">Portuguese (Portugal)</option>
-                            <option value="es" data-locale="es_ES">Spanish</option>
                             <option value="fr" data-locale="fr_FR">French</option>
                             <option value="de" data-locale="de_DE">German</option>
                             <option value="it" data-locale="it_IT">Italian</option>
@@ -312,7 +312,7 @@
                     </div>
                 </div>
                 <p style="color: var(--muted); margin-top: 0.75rem">
-                    🎨 Upload uma imagem para detectar automaticamente as 2 cores mais dominantes.
+                    🎨 Upload 1 image to automatically detect the 2 most dominant colors.
                 </p>
             </div>
 
@@ -388,7 +388,7 @@
                         <input type="text" id="iarc" class="form-control" placeholder="e.g. E10+" />
                     </div>
                     <div class="col-md-6">
-                        <label for="tagline">Description curta (tagline) <small style="color: var(--muted)">(opcional)</small></label>
+                        <label for="tagline">Short description (tagline) <small style="color: var(--muted)">(optional)</small></label>
                         <input
                             type="text"
                             id="tagline"
@@ -441,7 +441,7 @@
                                     for="genMaskable"
                                     class="d-flex align-items-center gap-2"
                                     style="color: var(--text); cursor: pointer;">
-                                    Gerar ícone maskable dedicado
+                                    Generate masked dedicated icon
                                 </label>
                             </div>
                             <div class="col-auto">
@@ -469,7 +469,7 @@
                             text-transform: none;
                             font-weight: 400;
                         "
-                        >(opcional)</small
+                        >(optional)</small
                     >
                 </div>
                 <div class="row g-3">
@@ -495,11 +495,11 @@
                             text-transform: none;
                             font-weight: 400;
                         "
-                        >(menu de contexto do ícone instalado · max 4)</small
+                        >(Installed icon context menu · max 4)</small
                     >
                 </div>
                 <div id="shortcutsList"></div>
-                <button class="btn-add" id="addShortcut">+ Adicionar shortcut</button>
+                <button class="btn-add" id="addShortcut">+ Add shortcut</button>
             </div>
 
             <!-- ── 07 Live Preview ─────────────────────────────────── -->
@@ -515,20 +515,20 @@
             <div style="text-align: center; margin: 2rem 0">
                 <button id="generateBtn" class="btn-generate" disabled><span>⚡</span> Generate PWA Package</button>
                 <p style="color: var(--muted); margin-top: 0.75rem" id="generateHint">
-                    Upload uma imagem para habilitar a geração
+                    Upload one image to enable generation
                 </p>
             </div>
 
             <!-- Progress -->
             <div class="progress-wrap" id="progressWrap">
-                <div class="progress-text" id="progressText">Processando...</div>
+                <div class="progress-text" id="progressText">Processing...</div>
                 <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
             </div>
 
             <!-- ── Output ──────────────────────────────────────────── -->
             <div class="output-section" id="outputSection">
                 <div class="section-card">
-                    <div class="section-title">✅ Arquivos Gerados</div>
+                    <div class="section-title">✅ Generated files</div>
                     <div class="d-flex gap-3 flex-wrap align-items-center">
                         <a aria-label="Download icons as zip file" id="downloadZip" class="download-btn">📦 Download icons.zip</a>
                         <div style="color: var(--muted)" id="zipContents"></div>
@@ -564,8 +564,8 @@
                     </div>
                     <div class="tab-content" id="swTab">
                         <div style="color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
-                            ⚙️ Coloque na <strong style="color: var(--text)">raiz do site</strong> (mesmo nível do
-                            index.html). O registro está incluído no HTML Head.
+                            ⚙️ Coloque na <strong style="color: var(--text)">raiz do site</strong> (same level as 
+                            index.html). The registry is included in HTML Head tag.
                         </div>
                         <div class="code-block">
                             <button class="btn-copy" onclick="copyCode('swCode')">copy</button>
@@ -580,8 +580,8 @@
                     </div>
                     <div class="tab-content" id="offlineTab">
                         <div style="color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
-                            📴 Página exibida quando o usuário está offline e a página não está em cache. Salve como
-                            <strong style="color: var(--text)">offline.html</strong> na raiz.
+                            📴 The webpage is exibited when the user is offline and the page is not in cache.
+                            Save as <strong style="color: var(--text)">offline.html</strong> in root.
                         </div>
                         <div class="code-block">
                             <button class="btn-copy" onclick="copyCode('offlineCode')">copy</button>
@@ -591,7 +591,7 @@
                     <div class="tab-content" id="robotsTab">
                         <div style="color: var(--muted); margin-bottom: 0.75rem; padding: 0 2px">
                             🤖 <strong style="color: var(--text)">robots.txt</strong> +
-                            <strong style="color: var(--text)">sitemap.xml</strong> básicos gerados com sua URL.
+                            Basic <strong style="color: var(--text)">sitemap.xml</strong> generated with your URL.
                         </div>
                         <div class="code-block" style="margin-bottom: 0.75rem">
                             <button class="btn-copy" onclick="copyCode('robotsCode')">copy robots.txt</button>
@@ -607,7 +607,7 @@
 
             <!-- Sticky regen -->
             <div class="sticky-regen" id="stickyRegen">
-                <button class="btn-regen" id="regenBtn">↺ Regenerar com dados atuais</button>
+                <button class="btn-regen" id="regenBtn">↺ Regenerated updated data</button>
             </div>
         </main>
         <!-- /main-container -->
