@@ -1063,6 +1063,7 @@ console.log('[SW] ${appName} loaded · cache:', CACHE_NAME);
 // ════════════════════════════════════════════════════
 function buildHeadCode(manifest) {
     const name = manifest.name,
+        id = manifest.id,
         desc = manifest.description || "",
         url = manifest.start_url;
     const themeColor = manifest.theme_color,
@@ -1228,6 +1229,7 @@ function buildHeadCode(manifest) {
         {
           "@context": "https://schema.org",
           "@type": "WebApplication",
+          "@id": "${esc(id)}"
           "name": "${esc(name)}",
           "alternateName": "${esc(shortName)}",
           "url": ""${esc(url)}",
@@ -1242,7 +1244,7 @@ function buildHeadCode(manifest) {
           "dateModified": "${(new Date().toISOString())}"
           "browserRequirements": "Requires JavaScript. Requires HTML5.",
           "inLanguage": "${esc(lang)}",
-          "image": "${esc(url)}${v("iconPath").replace(/\/$/, "")}/icon-512.png",
+          "image": "${esc(url)}/${v("iconPath").replace(/\/$/, "")}/icon-512.png",
         }
         </script>`
     );
