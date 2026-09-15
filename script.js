@@ -1232,11 +1232,11 @@ function buildHeadCode(manifest) {
           "@id": "${esc(id)}"
           "name": "${esc(name)}",
           "alternateName": "${esc(shortName)}",
-          "url": ""${esc(url)}",
+          "url": "${esc(url)}",
           "description": "${esc(desc)}",
           "applicationCategory": "${esc((manifest.categories || []).join(", "))}", 
           "operatingSystem": "All",
-          "softwareVersion": "${esc(desc)}}",
+          "softwareVersion": "${esc(desc)}",
           "author": {
             "@type": "Person", 
             "name": "${esc(author)}"
