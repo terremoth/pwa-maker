@@ -1223,7 +1223,28 @@ function buildHeadCode(manifest) {
         `  _installPrompt.userChoice.then(() => { _installPrompt = null; });`,
         `}`,
         `window.addEventListener('appinstalled', () => console.log('[PWA] App installed!'));`,
-        `<\/script>`
+        `<\/script>`,
+        `<script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "${esc(name)}",
+          "alternateName": "${esc(shortName)}",
+          "url": ""${esc(url)}",
+          "description": "${esc(desc)}",
+          "applicationCategory": "${esc((manifest.categories || []).join(", "))}", 
+          "operatingSystem": "All",
+          "softwareVersion": "${esc(desc)}}",
+          "author": {
+            "@type": "Person", 
+            "name": "${esc(author)}"
+          },
+          "dateModified": "${(new Date().toISOString())}"
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "inLanguage": "${esc(lang)}",
+          "image": "${esc(url)}${v("iconPath").replace(/\/$/, "")}/icon-512.png",
+        }
+        </script>`
     );
     return lines.join("\n");
 }
@@ -1260,7 +1281,7 @@ function buildJsonLd(manifest) {
         desc = manifest.description || "";
     const url = manifest.start_url,
         author = v("appAuthor") || name;
-    const version = v("appVersion") || "1.0",
+    const version = v("appVersion") || "1.0.0",
         lang = manifest.lang || "en";
     const iconPfx = v("iconPath").replace(/\/$/, "") + "/";
     const ip = iconPfx === "/" ? "" : iconPfx;
